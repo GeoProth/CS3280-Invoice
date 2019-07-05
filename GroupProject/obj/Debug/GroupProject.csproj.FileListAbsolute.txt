@@ -1,5 +1,4 @@
 C:\Users\gprot\Desktop\CS3280\GroupProject\GroupProject\obj\Debug\GroupProject.csprojAssemblyReference.cache
-C:\Users\gprot\Desktop\CS3280\GroupProject\GroupProject\obj\Debug\BureauBlue.baml
 C:\Users\gprot\Desktop\CS3280\GroupProject\GroupProject\obj\Debug\Items\wndItems.g.cs
 C:\Users\gprot\Desktop\CS3280\GroupProject\GroupProject\obj\Debug\Main\wndMain.g.cs
 C:\Users\gprot\Desktop\CS3280\GroupProject\GroupProject\obj\Debug\Search\wndSearch.g.cs
