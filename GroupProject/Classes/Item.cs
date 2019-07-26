@@ -22,7 +22,7 @@ namespace GroupProject.Classes
         /// <summary>
         /// float representing the Item Cost
         /// </summary>
-        private float Cost;
+        private double Cost;
         /// <summary>
         /// Blank Constructor
         /// </summary>
@@ -34,7 +34,7 @@ namespace GroupProject.Classes
         /// <param name="code"></param>
         /// <param name="desc"></param>
         /// <param name="cost"></param>
-        public Item(char code, string desc, float cost)
+        public Item(char code, string desc, double cost)
         {
             Code = code;
             Description = desc;
@@ -43,7 +43,7 @@ namespace GroupProject.Classes
         /// <summary>
         /// Getter and Setter for Item Cost
         /// </summary>
-        public float ItemCost
+        public double ItemCost
         {
             get
             {

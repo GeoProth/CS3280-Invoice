@@ -31,12 +31,12 @@
                 <RowDefinition Height="134*"/>
             </Grid.RowDefinitions>
             <Label Content="Invoice #:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" FontSize="18" FontFamily="Segoe UI Semibold" Foreground="#FFFFFEFE"/>
-            <Label x:Name="InvoiceNumLbl" Content="Num" HorizontalAlignment="Left" Margin="98,0,0,0" VerticalAlignment="Top" Height="32" Width="60" FontFamily="Segoe UI Semibold" FontSize="18" Foreground="#FFFFFCFC" Background="#FF606060" BorderBrush="#FFABADB3" HorizontalContentAlignment="Center"/>
+            <Label x:Name="InvoiceNumLbl" Content="TBD" Margin="98,0,0,0" VerticalAlignment="Top" Height="32" Width="124" FontFamily="Segoe UI Semibold" FontSize="18" Foreground="#FFFFFCFC" Background="#FF606060" BorderBrush="#FFABADB3" HorizontalAlignment="Left"/>
             <ListBox Margin="0,35,7,44" Name="ItemListBox"  SelectionChanged="ItemListBox_SelectionChanged" Grid.RowSpan="2"/>
             <Label Content="Date:" HorizontalAlignment="Left" Margin="412,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.087,0.809" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="18"/>
             <Label Content="Total:" HorizontalAlignment="Left" Margin="63,176.2,0,0" VerticalAlignment="Top" Grid.Row="1" RenderTransformOrigin="-0.927,1.09" FontFamily="Segoe UI Semibold" FontSize="16" Foreground="White"/>
             <Label x:Name="TotalLbl" HorizontalAlignment="Left" Margin="119,176.2,0,0" VerticalAlignment="Top" Height="28" Width="54" Content="" Grid.Row="1" Foreground="White" FontSize="16" FontFamily="Segoe UI Semibold"/>
-            <TextBox x:Name="DateBox" HorizontalAlignment="Left" Height="23" Margin="465,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" Foreground="White"/>
+            <TextBox x:Name="DateBox" HorizontalAlignment="Left" Height="23" Margin="465,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149" Foreground="White"/>
         </Grid>
         <Grid x:Name="NewInvoiceGrid" HorizontalAlignment="Left" Height="139" VerticalAlignment="Top" Width="660" Grid.Column="1" Margin="22,9.8,0,0" RenderTransformOrigin="0.506,0.649" Grid.Row="1">
             <Grid.ColumnDefinitions>

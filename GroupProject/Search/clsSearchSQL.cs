@@ -38,7 +38,7 @@ namespace GroupProject.Search
         #region Get Queries
         /// <summary>
         /// Get All Invoices
-        /// 
+        /// for list box
         /// </summary>
         /// <returns>A List of all Invoices in Database</returns>
         public List<Invoice> GetAllInvoices()

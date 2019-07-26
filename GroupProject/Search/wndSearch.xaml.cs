@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,33 +20,82 @@ namespace GroupProject.Search
     /// </summary>
     public partial class wndSearch : Window
     {
+        /// <summary>
+        /// search Logic Object
+        /// </summary>
+        private clsSearchLogic searchLogic;
         public wndSearch()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+                searchLogic = new clsSearchLogic();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+
         }
 
         private void InvoiceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         private void ClearFilterBtn_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
         private void InvoiceListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
-        private void CancelBtn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+       
 
         private void SelectInvoiceBtn_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,40 +20,103 @@ namespace GroupProject.Items
     /// </summary>
     public partial class wndItems : Window
     {
+        /// <summary>
+        /// Items Logic Object
+        /// </summary>
+        private clsItemsLogic itemsLogic;
         public wndItems()
         {
-            InitializeComponent();
-        }
 
-        private void AddItemBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void EditItemBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DeleteItemBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ItemListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            try
+            {
+                InitializeComponent();
+                itemsLogic = new clsItemsLogic();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
+        private void AddItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private void EditItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private void DeleteItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private void ItemListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+       
 
         private void SaveItemBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
+        /// <summary>
+        /// Exception Handling for Main Window
+        /// Shows Message Box to user
+        /// </summary>
+        /// <param name="Class"></param>
+        /// <param name="Method"></param>
+        /// <param name="Message"></param>
         private void HandleError(string Class, string Method, string Message)
         {
             try
@@ -64,5 +128,6 @@ namespace GroupProject.Items
                 System.IO.File.AppendAllText(@"C:\Errror.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
             }
         }
+
     }
 }

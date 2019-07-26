@@ -49,5 +49,6 @@
             <Button x:Name="SaveItemBtn" Content="Save Item" Grid.Column="1" HorizontalAlignment="Left" Margin="95.2,70,0,0" VerticalAlignment="Top" Width="97" Click="SaveItemBtn_Click" Height="41" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="Black"/>
         </Grid>
         <Button x:Name="BackBtn" Content="Back" HorizontalAlignment="Left" Margin="10,63.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="132" Height="49" Click="BackBtn_Click" BorderBrush="Black" FontSize="16" FontFamily="Segoe UI Semibold"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="10,186,0,0" VerticalAlignment="Top" Width="132" Height="48" FontSize="16" FontFamily="Segoe UI Semibold" IsCancel="True"/>
     </Grid>
 </Window>

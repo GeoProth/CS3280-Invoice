@@ -77,6 +77,22 @@ namespace GroupProject.Classes
                 this.Items = value;
             }
         }
+        /// <summary>
+        /// getter for total cost of Invoice
+        /// </summary>
+        public double TotalCost
+        {
+            get
+            {
+                double total = 0;
+                foreach(Item item in Items)
+                {
+                    total += item.ItemCost;
+                }
+                return total;
+            }
+            
+        }
         #endregion
     }
 }

@@ -84,10 +84,10 @@ namespace GroupProject.Main
 
                 DS = DataAccess.ExecuteSQLStatement(Sql, ref retVal);
                 //this should only pull one invoice
-                foreach(DataRow dr in DS.Tables[0].Rows)
-                {
-                    invoice = new Invoice(Convert.ToInt32(dr[0]), dr[1].ToString());
-                }
+                DataRow dr = DS.Tables[0].Rows[0];
+                
+                invoice = new Invoice(Convert.ToInt32(dr[0]), dr[1].ToString());
+                
 
                 return invoice;
             }
@@ -96,7 +96,11 @@ namespace GroupProject.Main
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
         }
-
+        /// <summary>
+        /// Query to get all Items within an Invoice by Invoice Number
+        /// </summary>
+        /// <param name="invoiceNum"></param>
+        /// <returns></returns>
         public List<Item> GetItemsByInvoiceNum(int invoiceNum)
         {
             try
@@ -145,8 +149,8 @@ namespace GroupProject.Main
                 int i = 1;// integer representing Line Item Number
                 foreach(Item item in invoice.InvoiceItems)
                 {
-                    string Sql = "INSERT INTO LineItems(InvoiceNum, LineItemNum, ItemCode) VALUES ("
-                        + invoice.InvoiceNumber + ", " + i + ", " + item.ItemCode + ")";
+                    string Sql = "INSERT INTO LineItems(InvoiceNum, LineItemNum, ItemCode) VALUES ('"
+                        + invoice.InvoiceNumber + "', '" + i + "', '" + item.ItemCode + "')";
                     DataAccess.ExecuteNonQuery(Sql);
                     i++;//increment LineItemNumber
                 }
@@ -161,6 +165,7 @@ namespace GroupProject.Main
         /// updates Invoice Date base on InvoiceNumber
         /// </summary>
         /// <param name="invoice"></param>
+        /*  Not sure if this is necessary just yet
         public void UpdateInvoiceDate(Invoice invoice)
         {
             try
@@ -174,22 +179,70 @@ namespace GroupProject.Main
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
         }
-
+        */
         #endregion
 
         #region Insert/Delete Queries
-      /*  public int InsertNewInvoice(Invoice newInvoice)
+        
+        ///<summary>
+        ///Insert new Invoice, return its number for displaying
+        ///</summary>
+        ///<param name="newInvoice">Invoice number</param>
+        public int InsertNewInvoice(Invoice newInvoice)
         {
             try
             {
-                //need to find the max
+                //Insert new Invoice first
+                string Sql = "INSERT INTO Invoices(InvoiceDate, TotalCost) VALUES('" + newInvoice.InvoiceDate + "', '" + newInvoice.TotalCost + "')";
+
+                DataAccess.ExecuteNonQuery(Sql);
+
+                //Get that Invoice Number
+                Sql = "SELECT TOP 1 InvoiceNum FROM Invoices ORDER BY DESC";
+                int retVal = 0;
+                DS = DataAccess.ExecuteSQLStatement(Sql, ref retVal);
+                int invoiceNum = Convert.ToInt32(DS.Tables[0].Rows[0][0]);
+
+                //insert Line items
+                int i = 1;//line item number
+                foreach(Item item in newInvoice.InvoiceItems)
+                {
+                    Sql = "INSERT INTO LineItems(InvoiceNum, LineItemNum, ItemCode) VALUES('" + invoiceNum + "', '" + i + "', '" + item.ItemCode + "')";
+                    DataAccess.ExecuteNonQuery(Sql);
+                    i++;
+
+                }
+
+                return invoiceNum;
             }
             catch (Exception ex)
             {
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
         }
-        */
+        /// <summary>
+        /// Delete an Invoice from both tables
+        /// </summary>
+        /// <param name="invoice"></param>
+        public void DeleteInvoice(Invoice invoice)
+        {
+            try
+            {
+                //need to delete from Line Items first
+                //Sql statement
+                string Sql = "DELETE FROM LineItems WHERE InvoiceNum = " + invoice.InvoiceNumber;
+                DataAccess.ExecuteNonQuery(Sql);
+
+                //delete from Invoices
+                Sql = "DELETE FROM Invoices WHERE InvoiceNum = " + invoice.InvoiceNumber;
+                DataAccess.ExecuteNonQuery(Sql);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
+        }
+        
         #endregion
 
 
