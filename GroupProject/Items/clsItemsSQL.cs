@@ -14,6 +14,7 @@ namespace GroupProject.Items
     /// </summary>
     class clsItemsSQL
     {
+        #region Variables
         /// <summary>
         /// Data Access Object
         /// </summary>
@@ -22,6 +23,9 @@ namespace GroupProject.Items
         /// Data Set Object
         /// </summary>
         DataSet DS;
+        #endregion
+
+        #region Methods
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -148,6 +152,7 @@ namespace GroupProject.Items
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
         }
+        #endregion
         #endregion
     }
 }

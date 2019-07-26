@@ -8,5 +8,12 @@ namespace GroupProject.Items
 {
     class clsItemsLogic
     {
+        #region Variables
+
+        #endregion
+
+        #region Methods
+
+        #endregion
     }
 }

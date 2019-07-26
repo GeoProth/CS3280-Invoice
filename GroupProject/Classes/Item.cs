@@ -11,6 +11,7 @@ namespace GroupProject.Classes
     /// </summary>
     public class Item
     {
+        #region Variables
         /// <summary>
         /// Char representing the Item Code
         /// </summary>
@@ -23,6 +24,8 @@ namespace GroupProject.Classes
         /// float representing the Item Cost
         /// </summary>
         private double Cost;
+        #endregion
+        #region Methods
         /// <summary>
         /// Blank Constructor
         /// </summary>
@@ -82,5 +85,6 @@ namespace GroupProject.Classes
                 this.Code = value;
             }
         }
+        #endregion
     }
 }

@@ -13,6 +13,7 @@ namespace GroupProject.Main
     /// </summary>
     class clsMainLogic
     {
+        #region Variables
         /// <summary>
         /// SQL Object for main
         /// </summary>
@@ -25,7 +26,9 @@ namespace GroupProject.Main
         /// current invoice
         /// </summary>
         private Invoice invoice;
+        #endregion
 
+        #region Methods
         public clsMainLogic()
         {
             try
@@ -53,5 +56,6 @@ namespace GroupProject.Main
                 this.items = value;
             }
         }
+        #endregion
     }
 }

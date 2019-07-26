@@ -15,6 +15,7 @@ namespace GroupProject.Main
     /// </summary>
     class clsMainSQL
     {
+        #region Variables
         /// <summary>
         /// Data Access Object
         /// </summary>
@@ -23,6 +24,9 @@ namespace GroupProject.Main
         /// Data Set Object
         /// </summary>
         DataSet DS;
+        #endregion
+
+        #region Methods
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -242,9 +246,8 @@ namespace GroupProject.Main
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
         }
-        
+
         #endregion
-
-
+        #endregion
     }
 }

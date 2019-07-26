@@ -78,7 +78,7 @@ namespace GroupProject.Classes
             }
         }
         /// <summary>
-        /// getter for total cost of Invoice
+        /// Getter for total cost of Invoice
         /// </summary>
         public double TotalCost
         {

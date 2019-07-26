@@ -11,6 +11,7 @@ namespace GroupProject.Search
 {
     class clsSearchSQL
     {
+        #region Variables
         /// <summary>
         /// Data Access Object
         /// </summary>
@@ -19,6 +20,9 @@ namespace GroupProject.Search
         /// Data Set Object
         /// </summary>
         DataSet DS;
+        #endregion
+
+        #region Methods
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -201,6 +205,7 @@ namespace GroupProject.Search
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
         }
+        #endregion
         #endregion
     }
 }

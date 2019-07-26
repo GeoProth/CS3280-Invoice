@@ -20,13 +20,16 @@ namespace GroupProject.Items
     /// </summary>
     public partial class wndItems : Window
     {
+        #region Variables
         /// <summary>
         /// Items Logic Object
         /// </summary>
         private clsItemsLogic itemsLogic;
+        #endregion
+
+        #region Methods
         public wndItems()
         {
-
             try
             {
                 InitializeComponent();
@@ -38,6 +41,11 @@ namespace GroupProject.Items
             }
         }
 
+        /// <summary>
+        /// Back button click. Allows user to go back
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -49,6 +57,12 @@ namespace GroupProject.Items
                 HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
+
+        /// <summary>
+        /// Add Item button click. Allows User to add Item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddItemBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -61,6 +75,11 @@ namespace GroupProject.Items
             }
         }
 
+        /// <summary>
+        /// Edit Item button click. Allows User to edit Item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditItemBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -73,6 +92,11 @@ namespace GroupProject.Items
             }
         }
 
+        /// <summary>
+        /// Delete Item button click. Allows User to Delete Item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteItemBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -85,6 +109,11 @@ namespace GroupProject.Items
             }
         }
 
+        /// <summary>
+        /// Item List combo box. Allows User to make desired selection of Items 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ItemListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -97,8 +126,11 @@ namespace GroupProject.Items
             }
         }
 
-       
-
+        /// <summary>
+        /// Save Item button click. Allows User to save Item.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveItemBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -128,6 +160,6 @@ namespace GroupProject.Items
                 System.IO.File.AppendAllText(@"C:\Errror.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
             }
         }
-
+        #endregion
     }
 }

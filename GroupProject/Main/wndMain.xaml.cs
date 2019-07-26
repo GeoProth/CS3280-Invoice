@@ -22,6 +22,7 @@ namespace GroupProject.Main
     /// </summary>
     public partial class wndMain : Window
     {
+        #region Methods
         /// <summary>
         /// Main Logic Object
         /// </summary>
@@ -232,6 +233,6 @@ namespace GroupProject.Main
                 System.IO.File.AppendAllText(@"C:\Errror.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
             }
         }
+        #endregion
     }
-
 }

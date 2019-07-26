@@ -8,5 +8,12 @@ namespace GroupProject.Search
 {
     class clsSearchLogic
     {
+        #region Variables
+
+        #endregion
+
+        #region Methods
+
+        #endregion
     }
 }
