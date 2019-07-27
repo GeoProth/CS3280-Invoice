@@ -30,6 +30,8 @@ namespace GroupProject.Items
         #region Methods
         public wndItems()
         {
+            //On initialization, set the current list of items in the ItemsLogic class
+            //Get it from the MainLogic class
             try
             {
                 InitializeComponent();
@@ -133,6 +135,10 @@ namespace GroupProject.Items
         /// <param name="e"></param>
         private void SaveItemBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Validate Item fields, add the new item to the list of items.
+            //Close the form
+            //In the main form, set the list of items in MainLogic by getting the list of items from the ItemsLogic class 
+            //Update the invoices with the new or edited item values
             try
             {
                 this.Close();

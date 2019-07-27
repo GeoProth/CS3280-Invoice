@@ -30,6 +30,8 @@ namespace GroupProject.Search
         #region Methods
         public wndSearch()
         {
+            //On initialization, get the current database of invoices from the MainLogic class
+            //Set it in the SearchLogic class
             try
             {
                 InitializeComponent();
@@ -119,7 +121,10 @@ namespace GroupProject.Search
         {
             try
             {
-
+                //Validate an invoice is selected
+                //Set the selected invoice as the current invoice in the SearchLogic class
+                //In the main class, get the current invoice from the SearchLogic class
+                //Display the current invoice
             }
             catch (Exception ex)
             {
