@@ -169,21 +169,20 @@ namespace GroupProject.Main
         /// updates Invoice Date base on InvoiceNumber
         /// </summary>
         /// <param name="invoice"></param>
-        /*  Not sure if this is necessary just yet
         public void UpdateInvoiceDate(Invoice invoice)
         {
             try
             {
                 //SQl Statement
                 string Sql = "UPDATE Invoices SET InvoiceDate = " + invoice.InvoiceDate + " WHERE InvoiceNum = " + invoice.InvoiceNumber;
-                DataAccess.Equals(Sql);
+                DataAccess.ExecuteNonQuery(Sql);
             }
             catch (Exception ex)
             {
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
         }
-        */
+        
         #endregion
 
         #region Insert/Delete Queries
@@ -202,7 +201,7 @@ namespace GroupProject.Main
                 DataAccess.ExecuteNonQuery(Sql);
 
                 //Get that Invoice Number
-                Sql = "SELECT TOP 1 InvoiceNum FROM Invoices ORDER BY DESC";
+                Sql = "SELECT TOP 1 InvoiceNum FROM Invoices ORDER BY InvoiceNum DESC";
                 int retVal = 0;
                 DS = DataAccess.ExecuteSQLStatement(Sql, ref retVal);
                 int invoiceNum = Convert.ToInt32(DS.Tables[0].Rows[0][0]);

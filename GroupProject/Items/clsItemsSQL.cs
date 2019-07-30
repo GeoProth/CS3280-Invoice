@@ -12,7 +12,7 @@ namespace GroupProject.Items
     /// <summary>
     /// 
     /// </summary>
-    class clsItemsSQL
+   public class clsItemsSQL
     {
         #region Variables
         /// <summary>

@@ -4,6 +4,18 @@
              xmlns:local="clr-namespace:GroupProject"
              StartupUri="./Main/wndMain.xaml">
     <Application.Resources>
-         
+        <DataTemplate x:Key="ItemBoxTemplate">
+            <StackPanel Margin="5" Grid.IsSharedSizeScope="True">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" SharedSizeGroup="A"/>
+                        <ColumnDefinition Width="280" SharedSizeGroup="B"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding Path=ItemDescription}" FontWeight="Bold" FontSize="16" Foreground="Black" Width="Auto" HorizontalAlignment="Left" TextAlignment="Left"/>
+             
+                    <TextBlock Grid.Column="1" Text="{Binding Path=ItemCost, StringFormat=Cost: ${0}}" FontSize="16" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Right" TextAlignment="Right"/>
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
     </Application.Resources>
 </Application>

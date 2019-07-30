@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GroupProject.Search
 {
-    class clsSearchSQL
+    public class clsSearchSQL
     {
         #region Variables
         /// <summary>

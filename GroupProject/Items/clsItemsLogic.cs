@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GroupProject.Items
 {
-    class clsItemsLogic
+    public class clsItemsLogic
     {
         #region Variables
 

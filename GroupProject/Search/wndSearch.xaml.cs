@@ -24,7 +24,7 @@ namespace GroupProject.Search
         /// <summary>
         /// search Logic Object
         /// </summary>
-        private clsSearchLogic searchLogic;
+        public clsSearchLogic searchLogic;
         #endregion
 
         #region Methods

@@ -1,4 +1,5 @@
-﻿using GroupProject.Items;
+﻿using GroupProject.Classes;
+using GroupProject.Items;
 using GroupProject.Search;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,8 @@ namespace GroupProject.Main
         /// Main Logic Object
         /// </summary>
         private clsMainLogic mainLogic;
+
+        private Item selectedItem;
         /// <summary>
         /// Default Constructor / Initializer
         /// </summary>
@@ -36,6 +39,17 @@ namespace GroupProject.Main
             {
                 InitializeComponent();
                 mainLogic = new clsMainLogic();
+                
+                DeleteInvoiceBtn.IsEnabled = false;
+                AddInvoiceBtn.IsEnabled = true;
+                EditInvoiceBtn.IsEnabled = false;
+                SaveInvoiceBtn.IsEnabled = false;
+                ItemComboBox.IsEnabled = false;
+                ItemListBox.IsEnabled = false;
+                AddItemBtn.IsEnabled = false;
+
+                DeleteItemBtn.IsEnabled = false;
+
             }
             catch (Exception ex)
             {
@@ -54,6 +68,26 @@ namespace GroupProject.Main
             {
                 wndSearch Search = new wndSearch();
                 Search.ShowDialog();
+
+                //Must wait for Search Logic to fully incorporate this
+                //but I think its pretty close.
+                /*
+                //return if nothing selected
+                if(Search.searchLogic.SelectedInvoice == null)
+                {
+                    return;
+                }
+
+                mainLogic.CurrentInvoice = Search.searchLogic.SelectedInvoice;
+
+                ItemListBox.IsEnabled = true;
+                DeleteInvoiceBtn.IsEnabled = true;
+                EditInvoiceBtn.IsEnabled = true;
+
+                TotalLbl.Content = mainLogic.CurrentInvoice.TotalCost.ToString();
+                InvoiceNumLbl.Content = mainLogic.CurrentInvoice.InvoiceNumber;
+                DateBox.Text = mainLogic.CurrentInvoice.InvoiceDate;
+                */
             }
             catch(Exception ex)
             {
@@ -88,7 +122,15 @@ namespace GroupProject.Main
         {
             try
             {
+                ItemListBox.IsEnabled = true;
+                ItemComboBox.IsEnabled = true;
+                ItemComboBox.ItemsSource = mainLogic.ItemsList;
+                ItemComboBox.DisplayMemberPath = "ItemDescription";
 
+                AddInvoiceBtn.IsEnabled = false;
+
+                //new empty invoice
+                mainLogic.CreateInvoice();
             }
             catch (Exception ex)
             {
@@ -105,7 +147,11 @@ namespace GroupProject.Main
         {
             try
             {
-
+                ItemListBox.IsEnabled = true;
+                ItemComboBox.IsEnabled = true;
+                AddInvoiceBtn.IsEnabled = false;
+                DeleteInvoiceBtn.IsEnabled = false;
+                EditInvoiceBtn.IsEnabled = false;
             }
             catch (Exception ex)
             {
@@ -122,7 +168,24 @@ namespace GroupProject.Main
         {
             try
             {
+                //Message Box warning
+                MessageBoxResult messageWarning = MessageBox.Show("Are you sure you want to delete Invoice #: " + mainLogic.CurrentInvoice.InvoiceNumber + "?",
+                                            "Delete", MessageBoxButton.YesNo);
 
+                if(messageWarning == MessageBoxResult.Yes)
+                {
+                    mainLogic.DeleteInvoice();
+
+                    DeleteInvoiceBtn.IsEnabled = false;
+                    AddInvoiceBtn.IsEnabled = true;
+                    EditInvoiceBtn.IsEnabled = false;
+                    mainLogic.CurrentInvoice = null;
+
+                    ItemListBox.ItemsSource = null;
+                    ItemListBox.IsEnabled = false;
+                    InvoiceNumLbl.Content = "TBD";
+                    DateBox.Text = "";
+                }
             }
             catch (Exception ex)
             {
@@ -139,7 +202,8 @@ namespace GroupProject.Main
         {
             try
             {
-
+                ListBox itemList = (ListBox)sender;
+                DeleteItemBtn.IsEnabled = true;
             }
             catch (Exception ex)
             {
@@ -157,6 +221,17 @@ namespace GroupProject.Main
         {
             try
             {
+                int qnty = Convert.ToInt32(QuantityBox.Text);
+                mainLogic.AddItem(selectedItem, qnty);
+
+                QuantityBox.Text = "0";
+                CostBox.Text = "$0.00";
+                TotalLbl.Content = "$" + mainLogic.CurrentInvoice.TotalCost.ToString();
+                ItemComboBox.SelectedIndex = -1;
+
+                ItemListBox.ItemsSource = mainLogic.CurrentInvoice.InvoiceItems.ToList();
+                
+                SaveInvoiceBtn.IsEnabled = true;
 
             }
             catch (Exception ex)
@@ -174,6 +249,16 @@ namespace GroupProject.Main
         {
             try
             {
+                if(ItemListBox.SelectedIndex == -1)
+                {
+                    return;
+                }
+                selectedItem = (Item)ItemListBox.SelectedItem;
+                mainLogic.DeleteItem(selectedItem);
+                ItemListBox.ItemsSource = mainLogic.CurrentInvoice.InvoiceItems.ToList();
+                DeleteItemBtn.IsEnabled = false;
+
+                SaveInvoiceBtn.IsEnabled = true;
 
             }
             catch (Exception ex)
@@ -190,8 +275,30 @@ namespace GroupProject.Main
         private void ItemComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
+                 //selectedPassenger = (Passenger)PassengerComboBox.SelectedItem;
             {
-
+               
+                //need to check for selection being -1
+                if(((ComboBox)sender).SelectedIndex == -1)
+                {
+                    QuantityBox.IsEnabled = false;
+                    AddItemBtn.IsEnabled = false;
+                    return;
+                }
+                else
+                {
+                    selectedItem = (Item)ItemComboBox.SelectedItem;
+                    if (!QuantityBox.IsEnabled)
+                    {
+                        QuantityBox.IsEnabled = true;
+                    }
+                    if (!AddItemBtn.IsEnabled)
+                    {
+                        AddItemBtn.IsEnabled = true;
+                    }
+                    QuantityBox.Text = "1";
+                    CostBox.Text = "$" + selectedItem.ItemCost.ToString();
+                }
             }
             catch (Exception ex)
             {
@@ -208,6 +315,26 @@ namespace GroupProject.Main
         {
             try
             {
+                string date = DateBox.Text;
+                mainLogic.SaveInvoice(date);
+                DateBox.IsEnabled = false;
+
+                DateBox.Text = mainLogic.CurrentInvoice.InvoiceDate.ToString();
+                
+
+                InvoiceNumLbl.Content = mainLogic.CurrentInvoice.InvoiceNumber.ToString();
+
+                DeleteInvoiceBtn.IsEnabled = true;
+                EditInvoiceBtn.IsEnabled = true;
+                AddInvoiceBtn.IsEnabled = true;
+
+                CostBox.Text = "$0.00";
+                QuantityBox.Text = "0";
+                ItemComboBox.IsEnabled = false;
+                ItemComboBox.SelectedIndex = -1;
+                SaveInvoiceBtn.IsEnabled = false;
+                ItemListBox.IsEnabled = false;
+
 
             }
             catch (Exception ex)

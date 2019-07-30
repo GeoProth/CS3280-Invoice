@@ -27,8 +27,10 @@ namespace GroupProject.Classes
         private List<Item> Items;
         #endregion
         #region Methods
-        //blank Constructor
-        public Invoice() { }
+        //new blank invoice will instantiate a new list of items
+        public Invoice() {
+            this.Items = new List<Item>();
+        }
         public Invoice(int num, string date)
         {
             Num = num;
