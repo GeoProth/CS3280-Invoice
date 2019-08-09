@@ -79,10 +79,37 @@ namespace GroupProject.Search
         {
           try
             {
+                var SQLSearch = new clsSearchSQL();
+
                 ClearFilterBtn.IsEnabled = true;
 
+                var selectedNum = InvoiceNumComboBox.SelectedValue;
+                var selectedDate = InvoiceDateComboBox.SelectedValue;
+                var selectedTotal = InvoiceTotalComboBox.SelectedValue;
+
+                int selectedNumValue = -1;
+                string selectedDateValue = null;
+                int selectedTotalValue = -1;
+
+                if (selectedNum != null)
+                {
+                    selectedNumValue = (int)selectedNum;
+                }
+
+                if (selectedDate != null)
+                {
+                    selectedDateValue = (string)selectedDate;
+                }
+
+                if (selectedTotal != null)
+                {
+                    selectedTotalValue = (int)selectedTotal;
+                }
+
+
                 //display filtered results
-                //InvoiceListBox.ItemsSource = searchLogic.FilteredList;
+                InvoiceListBox.ItemsSource = SQLSearch.GetFilteredInvoices(selectedNumValue, selectedDateValue, selectedTotalValue);
+                //searchLogic.InstantiateFilteredInvoices(InvoiceNumComboBox, InvoiceDateComboBox, InvoiceTotalComboBox);
             }
             catch (Exception ex)
             {

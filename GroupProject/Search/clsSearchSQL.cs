@@ -103,7 +103,7 @@ namespace GroupProject.Search
         /// <param name="invoiceDate"></param>
         /// <param name="totalCost"></param>
         /// <returns></returns>
-        public List<Invoice> GetFilteredInvoices(int invoiceNum, string invoiceDate, double totalCost)
+        public List<Invoice> GetFilteredInvoices(int invoiceNum, string invoiceDate, int totalCost)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace GroupProject.Search
                 // if Invoice date is selected
                 else if(invoiceDate != null)
                 {
-                    get += "InvoiceDate = " + invoiceDate;
+                    get += "InvoiceDate = CDATE('" + invoiceDate + "')";
                     // if both invoice date and total cost are selected
                     if(totalCost != -1)
                     {

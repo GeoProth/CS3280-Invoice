@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace GroupProject.Search
 {
@@ -58,8 +59,8 @@ namespace GroupProject.Search
                 dates = SQL.GetUniqueDates();
                 //get total costs of all invoices
                 totals = SQL.GetUniqueTotals();
-                //get filtered invoices
-                filtered = SQL.GetFilteredInvoices(NumbersList, DatesList, TotalsList);
+                ////
+                //filtered = SQL.GetFilteredInvoices();
 
             }
             catch (Exception ex)
@@ -158,6 +159,22 @@ namespace GroupProject.Search
             }
         }
         #endregion
+
+        //public void InstantiateFilteredInvoices(object num, object date, object total)
+        //{
+        //    ComboBox InvoiceNum = (ComboBox)num;
+        //    ComboBox InvoiceDate = (ComboBox)date;
+        //    ComboBox InvoiceTotal = (ComboBox)total;
+
+        //    InvoiceList.Clear();
+        //    foreach(Invoice i in SQL.GetFilteredInvoices(
+        //            InvoiceNum.SelectedIndex == -1 ? -1 : Convert.ToInt32(InvoiceNum.SelectedItem),
+        //            InvoiceDate.SelectedIndex == -1 ? "" : InvoiceDate.SelectedItem.ToString(), 
+        //            InvoiceTotal.SelectedIndex == -1 ? -1 : Convert.ToInt32(InvoiceTotal.SelectedItem)))
+        //    {
+        //        InvoiceList.Add(i);
+        //    }
+        //}
         #endregion
     }
 }
