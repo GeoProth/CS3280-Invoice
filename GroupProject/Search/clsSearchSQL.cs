@@ -103,7 +103,7 @@ namespace GroupProject.Search
         /// <param name="invoiceDate"></param>
         /// <param name="totalCost"></param>
         /// <returns></returns>
-        public List<Invoice> GetFilteredInvoices(int invoiceNum, string invoiceDate, int totalCost)
+        public List<Invoice> GetFilteredInvoices(int invoiceNum, string invoiceDate, double totalCost)
         {
             try
             {
@@ -141,8 +141,7 @@ namespace GroupProject.Search
                 {
                     invoices.Add(new Invoice(Convert.ToInt32(dr[0]), dr[1].ToString()));
                 }
-
-
+                
                 return invoices;
             }
             catch (Exception ex)
