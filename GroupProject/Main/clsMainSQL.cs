@@ -174,7 +174,7 @@ namespace GroupProject.Main
             try
             {
                 //SQl Statement
-                string Sql = "UPDATE Invoices SET InvoiceDate = " + invoice.InvoiceDate + " WHERE InvoiceNum = " + invoice.InvoiceNumber;
+                string Sql = "UPDATE Invoices SET InvoiceDate = " + "#"+invoice.InvoiceDate+"#" + " WHERE InvoiceNum = " + invoice.InvoiceNumber;
                 DataAccess.ExecuteNonQuery(Sql);
             }
             catch (Exception ex)

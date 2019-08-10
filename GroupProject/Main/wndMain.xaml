@@ -35,7 +35,7 @@
             <ListBox Margin="0,35,7,44" x:Name="ItemListBox"  SelectionChanged="ItemListBox_SelectionChanged" ItemTemplate="{StaticResource ItemBoxTemplate}" Background="#FFA8A7A7" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
             <Label Content="Date:" HorizontalAlignment="Left" Margin="371,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.087,0.809" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="18"/>
             <Label Content="Total:" HorizontalAlignment="Left" Margin="63,176.2,0,0" VerticalAlignment="Top" Grid.Row="1" RenderTransformOrigin="-0.927,1.09" FontFamily="Segoe UI Semibold" FontSize="16" Foreground="White"/>
-            <Label x:Name="TotalLbl" HorizontalAlignment="Left" Margin="119,176.2,0,0" VerticalAlignment="Top" Height="28" Width="72" Content="" Grid.Row="1" Foreground="White" FontSize="16" FontFamily="Segoe UI Semibold"/>
+            <Label x:Name="TotalLbl" HorizontalAlignment="Left" Margin="119,176.2,0,0" VerticalAlignment="Top" Height="28" Width="120" Content="" Grid.Row="1" Foreground="White" FontSize="16" FontFamily="Segoe UI Semibold"/>
             <TextBox x:Name="DateBox" HorizontalAlignment="Left" Height="23" Margin="429,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185" Foreground="Black" FontFamily="Segoe UI Semibold"/>
         </Grid>
         <Grid x:Name="NewInvoiceGrid" HorizontalAlignment="Left" Height="139" VerticalAlignment="Top" Width="660" Grid.Column="1" Margin="22,9.8,0,0" RenderTransformOrigin="0.506,0.649" Grid.Row="1">

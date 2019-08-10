@@ -12,7 +12,7 @@ namespace GroupProject.Items
     /// <summary>
     /// 
     /// </summary>
-   public class clsItemsSQL
+    public class clsItemsSQL
     {
         #region Variables
         /// <summary>
@@ -34,7 +34,7 @@ namespace GroupProject.Items
             try
             {
                 DataAccess = new clsDataAccess();
-                
+
             }
             catch (Exception ex)
             {
@@ -46,7 +46,7 @@ namespace GroupProject.Items
         /// <summary>
         /// Query to retrieve all the Items from Database
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A list of all items</returns>
         public List<Item> GetAllItems()
         {
             try
@@ -54,7 +54,7 @@ namespace GroupProject.Items
                 List<Item> items = new List<Item>();
 
                 //Sql Statement
-                string Sql = "SELECT * FROM ItemDesc";
+                string Sql = "SELECT * FROM ItemDesc ORDER BY ItemCode";
 
                 int retVal = 0;
 
@@ -66,6 +66,27 @@ namespace GroupProject.Items
                 }
 
                 return items;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Checks for the given code in the database
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns>Returns the code if in the database</returns>
+        public string CheckCode(string code)
+        {
+            try
+            {
+                //Sql statement
+                string sql = "SELECT TOP 1 ItemCode FROM ItemDesc WHERE ItemCode = '" + code + "'";
+
+                string result = DataAccess.ExecuteScalarSQL(sql);
+                return result;
             }
             catch (Exception ex)
             {
@@ -104,7 +125,7 @@ namespace GroupProject.Items
             try
             {
                 ///Sql statement
-                string del = "DELETE FROM ItemDesc WHERE ItemCode = " + code;
+                string del = "DELETE FROM ItemDesc WHERE ItemCode = '" + code + "'";
 
                 DataAccess.ExecuteNonQuery(del);
             }
@@ -112,6 +133,35 @@ namespace GroupProject.Items
             {
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Gets a list of invoices that have the given item code
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns>A list of invoices</returns>
+        public List<Invoice> GetBadInvoices(string code)
+        {
+            try
+            {
+                List<Invoice> invoices = new List<Invoice>();
+                //Sql statement
+                string sql = "SELECT DISTINCT I.InvoiceNum, I.InvoiceDate, I.TotalCost FROM Invoices I INNER JOIN LineItems LI ON LI.InvoiceNum = I.InvoiceNum WHERE LI.ItemCode = '" + code + "'";
+                int retVal = 0;
+                DS = DataAccess.ExecuteSQLStatement(sql, ref retVal);
+
+                foreach (DataRow dr in DS.Tables[0].Rows)
+                {
+                    invoices.Add(new Invoice(Convert.ToInt32(dr[0]), dr[1].ToString(), Convert.ToDouble(dr[2])));
+                }
+
+                return invoices;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
+
         }
         #endregion
 
@@ -128,23 +178,25 @@ namespace GroupProject.Items
             try
             {
                 //Partial SQl statement
-                string update = "UPDATE ItemDesc SET ";
-                // check for null values, might just update one thing
-                if(desc != null && cost != null)
-                {
-                    update += "ItemDesc = '" + desc + "', Cost = '" + cost + "'";
-                }
-                else if(desc == null)
-                {
-                    update += "Cost = '" + cost + "'";
-                }
-                else if(cost == null)
-                {
-                    update += "ItemDesc = '" + desc + "'";
-                }
+                //string update = "UPDATE ItemDesc SET ";
+                //// check for null values, might just update one thing
+                //if(desc != null && cost != null)
+                //{
+                //    update += "ItemDesc = '" + desc + "', Cost = '" + cost + "'";
+                //}
+                //else if(desc == null)
+                //{
+                //    update += "Cost = '" + cost + "'";
+                //}
+                //else if(cost == null)
+                //{
+                //    update += "ItemDesc = '" + desc + "'";
+                //}
 
-                update += " WHERE ItemCode = '" + code + "'";
-
+                //update += " WHERE ItemCode = '" + code + "'";
+                //UPDATE ItemDesc Set ItemDesc = 'GTS Plat', Cost = 30 WHERE ItemCode = 'E'
+                //Sql statement
+                string update = "UPDATE ItemDesc SET ItemDesc = '" + desc + "', Cost = " + cost + " WHERE ItemCode = '" + code + "'";
                 DataAccess.ExecuteNonQuery(update);
             }
             catch (Exception ex)

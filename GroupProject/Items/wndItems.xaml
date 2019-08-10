@@ -17,9 +17,9 @@
         <DataGrid x:Name="ItemListBox" HorizontalAlignment="Left" Height="266" Margin="157,13,0,0" Width="627" VerticalAlignment="Top" AutoGenerateColumns="False" 
                   SelectionMode="Single" CanUserResizeRows="False" IsReadOnly="True" CanUserAddRows="False" HorizontalContentAlignment="Stretch" SelectionChanged="ItemListBox_SelectionChanged" FontSize="16" FontFamily="Segoe UI Semibold">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Item Code" Width=".25*"/>
-                <DataGridTextColumn Header="Item Description" Width=".5*"/>
-                <DataGridTextColumn Header="Item Cost" Width=".25*"/>
+                <DataGridTextColumn x:Name ="colCode" Header="Item Code" Binding="{Binding Path= ItemCode}" Width=".25*"/>
+                <DataGridTextColumn Header="Item Description" Binding="{Binding Path= ItemDescription}" Width=".5*"/>
+                <DataGridTextColumn Header="Item Cost" Binding="{Binding Path= ItemCost}" Width=".25*"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Margin="0,13,651.6,135.4">
@@ -36,19 +36,19 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Margin="40,0,45.8,43" Width="91">
                 <Label Content="Item Code" Foreground="White" FontSize="16" FontFamily="Segoe UI Semibold"/>
-                <TextBox x:Name="ItemCodeBox" Height="33" IsEnabled="False" Foreground="White" Margin="0,0,0.2,0" Background="#FF606060"/>
+                <TextBox x:Name="ItemCodeBox" Height="33" IsEnabled="False" Foreground="White" Margin="0,0,0.2,0" FontFamily="Segoe UI Semibold" FontSize="16" Background="#FF606060"/>
             </StackPanel>
             <StackPanel  Grid.Column="1" Margin="42.2,-1,39,43" Width="202">
                 <Label Content="Item Description" Foreground="White" FontSize="16" FontFamily="Segoe UI Semibold"/>
-                <TextBox x:Name="ItemDescriptionBox" Height="33" IsEnabled="False" Foreground="White" Margin="0,0,-0.4,0" Background="#FF606060"/>
+                <TextBox x:Name="ItemDescriptionBox" Height="33" IsEnabled="False" Foreground="White" Margin="0,0,-0.4,0" FontFamily="Segoe UI Semibold" FontSize="16" Background="#FF606060"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Margin="38,0,37.2,41" Width="92">
                 <Label Content="Item Cost" Foreground="White" FontSize="16" FontFamily="Segoe UI Semibold"/>
-                <TextBox x:Name="ItemCostBox" Height="34" IsEnabled="False" Foreground="White" Background="#FF606060"/>
+                <TextBox x:Name="ItemCostBox" Height="34" IsEnabled="False" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="16" Background="#FF606060"/>
             </StackPanel>
             <Button x:Name="SaveItemBtn" Content="Save Item" Grid.Column="1" HorizontalAlignment="Left" Margin="95.2,70,0,0" VerticalAlignment="Top" Width="97" Click="SaveItemBtn_Click" Height="41" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="Black"/>
         </Grid>
-        <Button x:Name="BackBtn" Content="Back" HorizontalAlignment="Left" Margin="10,63.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="132" Height="49" Click="BackBtn_Click" BorderBrush="Black" FontSize="16" FontFamily="Segoe UI Semibold"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="10,186,0,0" VerticalAlignment="Top" Width="132" Height="48" FontSize="16" FontFamily="Segoe UI Semibold" IsCancel="True"/>
+        <Button x:Name="BackBtn" Content="Back" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top" Width="132" Height="49" Click="BackBtn_Click" BorderBrush="Black" FontSize="16" FontFamily="Segoe UI Semibold"/>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="132" Height="48" FontSize="16" FontFamily="Segoe UI Semibold" IsCancel="True" Grid.Row="1"/>
     </Grid>
 </Window>

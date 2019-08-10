@@ -13,7 +13,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=ItemDescription}" FontWeight="Bold" FontSize="16" Foreground="Black" Width="Auto" HorizontalAlignment="Left" TextAlignment="Left"/>
              
-                    <TextBlock Grid.Column="1" Text="{Binding Path=ItemCost, StringFormat=Cost: ${0}}" FontSize="16" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Right" TextAlignment="Right"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Path=ItemCost, StringFormat=Cost: {0:C}}" FontSize="16" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Right" TextAlignment="Right"/>
                 </Grid>
             </StackPanel>
         </DataTemplate>

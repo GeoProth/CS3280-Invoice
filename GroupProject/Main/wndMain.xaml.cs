@@ -47,7 +47,7 @@ namespace GroupProject.Main
                 ItemComboBox.IsEnabled = false;
                 ItemListBox.IsEnabled = false;
                 AddItemBtn.IsEnabled = false;
-
+                //ItemListBox.ItemsSource = mainLogic.CurrentInvoice.InvoiceItems.ToList();
                 DeleteItemBtn.IsEnabled = false;
 
             }
@@ -84,10 +84,10 @@ namespace GroupProject.Main
                 ItemListBox.IsEnabled = true;
                 DeleteInvoiceBtn.IsEnabled = true;
                 EditInvoiceBtn.IsEnabled = true;
-                TotalLbl.Content = "$" + mainLogic.CurrentInvoice.TotalCost.ToString();
+                TotalLbl.Content = "$" + mainLogic.CurrentInvoice.TotalCost.ToString("00.00");
                 
                 ItemListBox.ItemsSource = mainLogic.CurrentInvoice.InvoiceItems.ToList();
-                TotalLbl.Content = mainLogic.CurrentInvoice.TotalCost.ToString();
+                TotalLbl.Content = mainLogic.CurrentInvoice.TotalCost.ToString("00.00");
                 InvoiceNumLbl.Content = mainLogic.CurrentInvoice.InvoiceNumber;
                 DateBox.Text = mainLogic.CurrentInvoice.InvoiceDate;
                 
@@ -155,6 +155,9 @@ namespace GroupProject.Main
                 AddInvoiceBtn.IsEnabled = false;
                 DeleteInvoiceBtn.IsEnabled = false;
                 EditInvoiceBtn.IsEnabled = false;
+                ItemListBox.ItemsSource = mainLogic.CurrentInvoice.InvoiceItems.ToList();
+                ItemComboBox.ItemsSource = mainLogic.ItemsList;
+                ItemComboBox.DisplayMemberPath = "ItemDescription";
             }
             catch (Exception ex)
             {
