@@ -164,6 +164,11 @@ namespace GroupProject.Main
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
         }
+
+        public void UpdateCost()
+        {
+
+        }
         /// <summary>
         /// Delete Item from invoice list
         /// </summary>

@@ -109,6 +109,8 @@ namespace GroupProject.Main
             {
                 wndItems Items = new wndItems();
                 Items.ShowDialog();
+
+                ItemComboBox.ItemsSource = mainLogic.ItemsList.ToList();
             }
             catch (Exception ex)
             {
@@ -229,7 +231,7 @@ namespace GroupProject.Main
             {
                 int qnty = Convert.ToInt32(QuantityBox.Text);
                 mainLogic.AddItem(selectedItem, qnty);
-
+                
                 QuantityBox.Text = "0";
                 CostBox.Text = "$0.00";
                 TotalLbl.Content = "$" + mainLogic.CurrentInvoice.TotalCost.ToString();

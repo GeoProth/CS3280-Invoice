@@ -90,6 +90,12 @@ namespace GroupProject.Classes
         {
             get
             {
+                double total = 0;
+                foreach (Item item in Items)
+                {
+                    total += item.ItemCost;
+                    this.Total = total;
+                }
                 return this.Total;
             }
             set
