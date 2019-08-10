@@ -134,6 +134,9 @@ namespace GroupProject.Search
                 //load default view without filters
                 InvoiceListBox.ItemsSource = searchLogic.InvoiceList;
 
+                //disable select invoice button
+                SelectInvoiceBtn.IsEnabled = false;
+
             }
             catch (Exception ex)
             {
