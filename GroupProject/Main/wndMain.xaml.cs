@@ -71,7 +71,7 @@ namespace GroupProject.Main
 
                 //Must wait for Search Logic to fully incorporate this
                 //but I think its pretty close.
-                /*
+                
                 //return if nothing selected
                 if(Search.searchLogic.SelectedInvoice == null)
                 {
@@ -79,15 +79,18 @@ namespace GroupProject.Main
                 }
 
                 mainLogic.CurrentInvoice = Search.searchLogic.SelectedInvoice;
+                mainLogic.ResetSelectedInvoice();
 
                 ItemListBox.IsEnabled = true;
                 DeleteInvoiceBtn.IsEnabled = true;
                 EditInvoiceBtn.IsEnabled = true;
-
+                TotalLbl.Content = "$" + mainLogic.CurrentInvoice.TotalCost.ToString();
+                
+                ItemListBox.ItemsSource = mainLogic.CurrentInvoice.InvoiceItems.ToList();
                 TotalLbl.Content = mainLogic.CurrentInvoice.TotalCost.ToString();
                 InvoiceNumLbl.Content = mainLogic.CurrentInvoice.InvoiceNumber;
                 DateBox.Text = mainLogic.CurrentInvoice.InvoiceDate;
-                */
+                
             }
             catch(Exception ex)
             {

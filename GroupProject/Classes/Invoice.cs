@@ -21,9 +21,12 @@ namespace GroupProject.Classes
         /// string representing the Invoice Date
         /// </summary>
         private string Date;
+
+        private double Total;
         /// <summary>
         /// List representing Items associated with an Invoice
         /// </summary>
+        
         private List<Item> Items;
         #endregion
         #region Methods
@@ -31,10 +34,11 @@ namespace GroupProject.Classes
         public Invoice() {
             this.Items = new List<Item>();
         }
-        public Invoice(int num, string date)
+        public Invoice(int num, string date, double totalCost)
         {
             Num = num;
             Date = date;
+            Total = totalCost;
             Items = new List<Item>();
         }
         /// <summary>
@@ -86,12 +90,17 @@ namespace GroupProject.Classes
         {
             get
             {
+                return this.Total;
+            }
+            set
+            {
                 double total = 0;
                 foreach(Item item in Items)
                 {
                     total += item.ItemCost;
+                    this.Total = total;
                 }
-                return total;
+                
             }
             
         }

@@ -58,7 +58,7 @@ namespace GroupProject.Search
                 //get dates of all invoices
                 dates = SQL.GetUniqueDates();
                 //get total costs of all invoices
-                totals = SQL.GetUniqueTotals();
+                totals = SQL.GetTotals();
                 ////
                 //filtered = SQL.GetFilteredInvoices();
 
@@ -159,22 +159,50 @@ namespace GroupProject.Search
             }
         }
         #endregion
+        #region methods
+        /// <summary>
+        /// function to reset invoices after clear filter
+        /// </summary>
+        public void ResetInvoices()
+        {
+            try
+            {
+                InvoiceList.Clear();
+                InvoiceList = SQL.GetAllInvoices();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
+        }
+        public void InstantiateFilteredInvoices(object num, object date, object total)
+        {
+            try
+            {
+                ComboBox InvoiceNum = (ComboBox)num;
+                ComboBox InvoiceDate = (ComboBox)date;
+                ComboBox InvoiceTotal = (ComboBox)total;
+                string Idate;
+                if (InvoiceDate.SelectedIndex == -1)
+                {
+                    Idate = null;
+                }
+                else
+                {
+                    Idate = InvoiceDate.SelectedItem.ToString();
+                }
+                int Inum = Convert.ToInt32(InvoiceNum.SelectedValue);
+                double Itot = Convert.ToDouble(InvoiceTotal.SelectedValue);
+                InvoiceList.Clear();
+                InvoiceList = SQL.GetFilteredInvoices(Inum, Idate, Itot);
+            }
 
-        //public void InstantiateFilteredInvoices(object num, object date, object total)
-        //{
-        //    ComboBox InvoiceNum = (ComboBox)num;
-        //    ComboBox InvoiceDate = (ComboBox)date;
-        //    ComboBox InvoiceTotal = (ComboBox)total;
-
-        //    InvoiceList.Clear();
-        //    foreach(Invoice i in SQL.GetFilteredInvoices(
-        //            InvoiceNum.SelectedIndex == -1 ? -1 : Convert.ToInt32(InvoiceNum.SelectedItem),
-        //            InvoiceDate.SelectedIndex == -1 ? "" : InvoiceDate.SelectedItem.ToString(), 
-        //            InvoiceTotal.SelectedIndex == -1 ? -1 : Convert.ToInt32(InvoiceTotal.SelectedItem)))
-        //    {
-        //        InvoiceList.Add(i);
-        //    }
-        //}
+            catch(Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
+        }
+        #endregion
         #endregion
     }
 }

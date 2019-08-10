@@ -79,37 +79,22 @@ namespace GroupProject.Search
         {
           try
             {
-                var SQLSearch = new clsSearchSQL();
 
-                ClearFilterBtn.IsEnabled = true;
-
-                var selectedNum = InvoiceNumComboBox.SelectedValue;
-                var selectedDate = InvoiceDateComboBox.SelectedValue;
-                var selectedTotal = InvoiceTotalComboBox.SelectedValue;
-
-                int selectedNumValue = -1;
-                string selectedDateValue = null;
-                int selectedTotalValue = -1;
-
-                if (selectedNum != null)
+                if(((ComboBox)sender).SelectedIndex == -1)
                 {
-                    selectedNumValue = (int)selectedNum;
+                    return;
                 }
 
-                if (selectedDate != null)
+                if (!ClearFilterBtn.IsEnabled)
                 {
-                    selectedDateValue = (string)selectedDate;
+                    ClearFilterBtn.IsEnabled = true;
                 }
-
-                if (selectedTotal != null)
-                {
-                    selectedTotalValue = (int)selectedTotal;
-                }
-
+              
 
                 //display filtered results
-                InvoiceListBox.ItemsSource = SQLSearch.GetFilteredInvoices(selectedNumValue, selectedDateValue, selectedTotalValue);
-                //searchLogic.InstantiateFilteredInvoices(InvoiceNumComboBox, InvoiceDateComboBox, InvoiceTotalComboBox);
+                searchLogic.InstantiateFilteredInvoices(InvoiceNumComboBox, InvoiceDateComboBox, InvoiceTotalComboBox);
+                InvoiceListBox.ItemsSource = searchLogic.InvoiceList;
+
             }
             catch (Exception ex)
             {
@@ -130,7 +115,8 @@ namespace GroupProject.Search
                 InvoiceNumComboBox.SelectedIndex = -1;
                 InvoiceDateComboBox.SelectedIndex = -1;
                 InvoiceTotalComboBox.SelectedIndex = -1;
-
+                //reset list
+                searchLogic.ResetInvoices();
                 //load default view without filters
                 InvoiceListBox.ItemsSource = searchLogic.InvoiceList;
 

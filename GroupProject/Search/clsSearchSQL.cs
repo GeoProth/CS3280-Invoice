@@ -58,7 +58,7 @@ namespace GroupProject.Search
 
                 foreach(DataRow dr in DS.Tables[0].Rows)
                 {
-                    invoices.Add(new Invoice(Convert.ToInt32(dr[0]), dr[1].ToString()));
+                    invoices.Add(new Invoice(Convert.ToInt32(dr[0]), dr[1].ToString(), Convert.ToDouble(dr[2])));
                 }
 
                 return invoices;
@@ -103,7 +103,7 @@ namespace GroupProject.Search
         /// <param name="invoiceDate"></param>
         /// <param name="totalCost"></param>
         /// <returns></returns>
-        public List<Invoice> GetFilteredInvoices(int invoiceNum, string invoiceDate, int totalCost)
+        public List<Invoice> GetFilteredInvoices(int invoiceNum, string invoiceDate, double totalCost)
         {
             try
             {
@@ -111,27 +111,26 @@ namespace GroupProject.Search
                 //partial Sql
                 string get = "SELECT * FROM Invoices WHERE ";
                 //decide what filter is being used
-                //if invoice Number is selected then its going to find a specific invoice, no need for date or cost
-                if(invoiceNum != -1)
+                //if invoice num is provided, then its specific
+                if(invoiceNum != 0)
                 {
-                    get += "InvoiceNum = " + invoiceNum;
+                   get += "InvoiceNum = " + invoiceNum;
                 }
-                // if Invoice date is selected
+                //check for more than two values with date and cost
+               else if((invoiceDate == null ? -1 : 1) + (totalCost == 0 ? -1 : 1) > 1)
+                {
+                    
+                     get += "InvoiceDate = " + "#" + invoiceDate + "#";
+                    get += " AND TotalCost = " + totalCost;
+                }
                 else if(invoiceDate != null)
                 {
-                    get += "InvoiceDate = CDATE('" + invoiceDate + "')";
-                    // if both invoice date and total cost are selected
-                    if(totalCost != -1)
-                    {
-                        get += "AND TotalCost = " + totalCost;
-                    }
+                    get += "InvoiceDate = " + "#" + invoiceDate + "#";
                 }
-                //Assume its just total cost selected
-                else
+                else if(totalCost != 0)
                 {
                     get += "TotalCost = " + totalCost;
                 }
-               
 
                 int retVal = 0;
 
@@ -139,7 +138,7 @@ namespace GroupProject.Search
 
                 foreach(DataRow dr in DS.Tables[0].Rows)
                 {
-                    invoices.Add(new Invoice(Convert.ToInt32(dr[0]), dr[1].ToString()));
+                    invoices.Add(new Invoice(Convert.ToInt32(dr[0]), dr[1].ToString(), Convert.ToDouble(dr[2])));
                 }
                 
                 return invoices;
@@ -180,12 +179,12 @@ namespace GroupProject.Search
         /// Get all Unique Invoice totals for group box
         /// </summary>
         /// <returns></returns>
-        public List<double> GetUniqueTotals()
+        public List<double> GetTotals()
         {
             try
             {
                 List<double> totals = new List<double>();
-                string get = "SELECT DISTINCT TotalCost FROM Invoices";
+                string get = "SELECT TotalCost FROM Invoices";
 
                 int retVal = 0;
 

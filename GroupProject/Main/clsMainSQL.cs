@@ -90,7 +90,7 @@ namespace GroupProject.Main
                 //this should only pull one invoice
                 DataRow dr = DS.Tables[0].Rows[0];
                 
-                invoice = new Invoice(Convert.ToInt32(dr[0]), dr[1].ToString());
+                invoice = new Invoice(Convert.ToInt32(dr[0]), dr[1].ToString(), Convert.ToDouble(dr[2]));
                 
 
                 return invoice;

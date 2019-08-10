@@ -164,12 +164,28 @@ namespace GroupProject.Main
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
         }
-
+        /// <summary>
+        /// Delete Item from invoice list
+        /// </summary>
+        /// <param name="ItemSelected"></param>
         public void DeleteItem(Item ItemSelected)
         {
             try
             {
                 CurrentInvoice.InvoiceItems.Remove(ItemSelected);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
+        }
+        //reset current invoice list
+        public void ResetSelectedInvoice()
+        {
+            try { 
+                CurrentInvoice.InvoiceItems.Clear();
+
+                CurrentInvoice.InvoiceItems = SQL.GetItemsByInvoiceNum(CurrentInvoice.InvoiceNumber);
             }
             catch (Exception ex)
             {
