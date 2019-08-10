@@ -193,6 +193,7 @@ namespace GroupProject.Main
                     ItemListBox.IsEnabled = false;
                     InvoiceNumLbl.Content = "TBD";
                     DateBox.Text = "";
+                    TotalLbl.Content = "";
                 }
             }
             catch (Exception ex)
@@ -264,6 +265,7 @@ namespace GroupProject.Main
                 selectedItem = (Item)ItemListBox.SelectedItem;
                 mainLogic.DeleteItem(selectedItem);
                 ItemListBox.ItemsSource = mainLogic.CurrentInvoice.InvoiceItems.ToList();
+                TotalLbl.Content = mainLogic.CurrentInvoice.TotalCost.ToString();
                 DeleteItemBtn.IsEnabled = false;
 
                 SaveInvoiceBtn.IsEnabled = true;

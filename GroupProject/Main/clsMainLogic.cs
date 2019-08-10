@@ -165,10 +165,7 @@ namespace GroupProject.Main
             }
         }
 
-        public void UpdateCost()
-        {
-
-        }
+  
         /// <summary>
         /// Delete Item from invoice list
         /// </summary>
