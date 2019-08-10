@@ -194,6 +194,7 @@ namespace GroupProject.Main
                     InvoiceNumLbl.Content = "TBD";
                     DateBox.Text = "";
                     TotalLbl.Content = "";
+                    CostBox.Text = "";
                 }
             }
             catch (Exception ex)
