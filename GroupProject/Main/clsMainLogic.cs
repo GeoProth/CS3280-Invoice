@@ -181,6 +181,24 @@ namespace GroupProject.Main
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
             }
         }
+        /// <summary>
+        /// Reset Items list when new Item is added in Item window
+        /// </summary>
+        public void ResetItemsList()
+        {
+            try
+            {
+                ItemsList.Clear();
+                foreach(Item item in SQL.GetAllItems())
+                {
+                    ItemsList.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " --> " + ex.Message);
+            }
+        }
         //reset current invoice list
         public void ResetSelectedInvoice()
         {

@@ -109,7 +109,7 @@ namespace GroupProject.Main
             {
                 wndItems Items = new wndItems();
                 Items.ShowDialog();
-
+                mainLogic.ResetItemsList();
                 ItemComboBox.ItemsSource = mainLogic.ItemsList.ToList();
             }
             catch (Exception ex)
