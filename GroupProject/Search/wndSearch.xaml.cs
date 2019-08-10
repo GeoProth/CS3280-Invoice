@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GroupProject.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -36,6 +37,14 @@ namespace GroupProject.Search
             {
                 InitializeComponent();
                 searchLogic = new clsSearchLogic();
+
+                //load all invoices into InvoiceListBox data grid
+                InvoiceListBox.ItemsSource = searchLogic.InvoiceList;
+                
+                //load correct list into combo boxes
+                InvoiceNumComboBox.ItemsSource = searchLogic.NumbersList;
+                InvoiceDateComboBox.ItemsSource = searchLogic.DatesList;
+                InvoiceTotalComboBox.ItemsSource = searchLogic.TotalsList;
             }
             catch (Exception ex)
             {
@@ -44,7 +53,7 @@ namespace GroupProject.Search
         }
 
         /// <summary>
-        /// Cancel button click. Allows user to cancel.
+        /// Cancel button click. Allows user to cancel, exits window.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -68,9 +77,39 @@ namespace GroupProject.Search
         /// <param name="e"></param>
         private void InvoiceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
+          try
             {
+                var SQLSearch = new clsSearchSQL();
 
+                ClearFilterBtn.IsEnabled = true;
+
+                var selectedNum = InvoiceNumComboBox.SelectedValue;
+                var selectedDate = InvoiceDateComboBox.SelectedValue;
+                var selectedTotal = InvoiceTotalComboBox.SelectedValue;
+
+                int selectedNumValue = -1;
+                string selectedDateValue = null;
+                int selectedTotalValue = -1;
+
+                if (selectedNum != null)
+                {
+                    selectedNumValue = (int)selectedNum;
+                }
+
+                if (selectedDate != null)
+                {
+                    selectedDateValue = (string)selectedDate;
+                }
+
+                if (selectedTotal != null)
+                {
+                    selectedTotalValue = (int)selectedTotal;
+                }
+
+
+                //display filtered results
+                InvoiceListBox.ItemsSource = SQLSearch.GetFilteredInvoices(selectedNumValue, selectedDateValue, selectedTotalValue);
+                //searchLogic.InstantiateFilteredInvoices(InvoiceNumComboBox, InvoiceDateComboBox, InvoiceTotalComboBox);
             }
             catch (Exception ex)
             {
@@ -87,6 +126,16 @@ namespace GroupProject.Search
         {
             try
             {
+                //set all filters to -1 to clear current indexes but keep combo box items.
+                InvoiceNumComboBox.SelectedIndex = -1;
+                InvoiceDateComboBox.SelectedIndex = -1;
+                InvoiceTotalComboBox.SelectedIndex = -1;
+
+                //load default view without filters
+                InvoiceListBox.ItemsSource = searchLogic.InvoiceList;
+
+                //disable select invoice button
+                SelectInvoiceBtn.IsEnabled = false;
 
             }
             catch (Exception ex)
@@ -104,7 +153,12 @@ namespace GroupProject.Search
         {
             try
             {
-
+                //if a row is clicked on and is not null
+                if (InvoiceListBox != null)
+                {
+                    //allows search box to be enabled only if a user clicks an invoice
+                    SelectInvoiceBtn.IsEnabled = true;
+                }
             }
             catch (Exception ex)
             {
@@ -113,7 +167,7 @@ namespace GroupProject.Search
         }
        
         /// <summary>
-        /// Select Invoice button click. Allows User to select and invoice.
+        /// Select Invoice button click. Allows User to select an invoice.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -125,6 +179,9 @@ namespace GroupProject.Search
                 //Set the selected invoice as the current invoice in the SearchLogic class
                 //In the main class, get the current invoice from the SearchLogic class
                 //Display the current invoice
+                
+                searchLogic.SelectedInvoice = (Invoice)InvoiceListBox.SelectedItem; 
+                this.Close();
             }
             catch (Exception ex)
             {

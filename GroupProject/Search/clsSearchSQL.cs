@@ -119,7 +119,7 @@ namespace GroupProject.Search
                 // if Invoice date is selected
                 else if(invoiceDate != null)
                 {
-                    get += "InvoiceDate = " + invoiceDate;
+                    get += "InvoiceDate = CDATE('" + invoiceDate + "')";
                     // if both invoice date and total cost are selected
                     if(totalCost != -1)
                     {
@@ -141,8 +141,7 @@ namespace GroupProject.Search
                 {
                     invoices.Add(new Invoice(Convert.ToInt32(dr[0]), dr[1].ToString()));
                 }
-
-
+                
                 return invoices;
             }
             catch (Exception ex)

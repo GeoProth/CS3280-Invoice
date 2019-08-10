@@ -24,21 +24,21 @@
             <Label Content="Invoice Total" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="16" Margin="0,0,103.8,0"/>
             <ComboBox x:Name="InvoiceTotalComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="133" SelectionChanged="InvoiceComboBox_SelectionChanged" Height="26"/>
         </StackPanel>
-        <DataGrid x:Name="InvoiceListBox" HorizontalContentAlignment="Stretch" Height="263" Margin="46,76,45,0" VerticalAlignment="Top" AutoGenerateColumns="False" 
+        <DataGrid x:Name="InvoiceListBox" HorizontalContentAlignment="Stretch" Height="263" Margin="46,76,45,0" VerticalAlignment="Top" AutoGenerateColumns="False"
                   SelectionMode="Single" CanUserResizeRows="False" IsReadOnly="True" CanUserAddRows="False" SelectionChanged="InvoiceListBox_SelectionChanged" FontFamily="Segoe UI Semibold" FontSize="14">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Invoice Number" Width=".3*"/>
-                <DataGridTextColumn Header="Invoice Date"  Width=".4*"/>
-                <DataGridTextColumn Header="Invoice Total" Width=".3*"/>
+                <DataGridTextColumn Header="Invoice Number" Binding="{Binding Path= InvoiceNumber}" Width=".3*"/>
+                <DataGridTextColumn Header="Invoice Date"  Binding="{Binding Path= InvoiceDate}" Width=".4*"/>
+                <DataGridTextColumn Header="Invoice Total" Binding="{Binding Path= TotalCost}" Width=".3*"/>
             </DataGrid.Columns>
 
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <DataGrid HorizontalContentAlignment="Stretch" AutoGenerateColumns="False" SelectionMode="Single" CanUserResizeRows="False" Height="Auto" Width="537" ItemsSource="{Binding _Items}" Margin="25,0,0,0" IsReadOnly="True">
+                    <DataGrid HorizontalContentAlignment="Stretch" AutoGenerateColumns="False" SelectionMode="Single" CanUserResizeRows="False" Height="Auto" Width="537" ItemsSource="{Binding InvoiceItems}" Margin="25,0,0,0" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Item Code" Width="*" Binding="{Binding Path=_Code}"/>
-                            <DataGridTextColumn Header="Item Name" Width="*" Binding="{Binding Path=_Desc}"/>
-                            <DataGridTextColumn Header="Item Cost" Width="*" Binding="{Binding Path=_Cost}"/>
+                            <DataGridTextColumn Header="Item Code" Width="*" Binding="{Binding Path= Code}"/>
+                            <DataGridTextColumn Header="Item Name" Width="*" Binding="{Binding Path= Desc}"/>
+                            <DataGridTextColumn Header="Item Cost" Width="*" Binding="{Binding Path= Cost}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </DataTemplate>
